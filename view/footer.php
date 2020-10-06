@@ -7,7 +7,7 @@
                 <img src="img/logo-3il-groupe1.png" >
                 <hr class="light" color="beige">
                 <p>0753756979</p>
-                <p>mouafopauldenilson@gmail.com</p>
+                <p>3il@3il.fr</p>
                 <p>43 Rue de Sainte-Anne, </p>
                 <p>France - Limoges - 87015</p>
             </div>
@@ -30,7 +30,6 @@
             <div class="col-12">
                 <hr class="light" color="beige">
                 <h5>Je me protège, je protège les autres</h5>
-
             </div>
         </div>
     </div>

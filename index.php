@@ -12,18 +12,31 @@
     </head>
     <body>
 
-        <!-- Navigation -->
-        <?php require_once('view/navigation.php'); ?>
+        <?php
+            if(empty($_SESSION['login']) || $_SESSION['login'] == false)
+            {
+                header('location: view/login.php');
+            }else
+            {
+                echo '
+                
+                <!-- Navigation -->
+                <?php require_once("view/navigation.php"); ?>
+            
+                <!-- Body -->
+                <div class="container-fluid">
+                    <div class="row">
+                        <?php require_once("view/filter.php");  require_once("view/body.php"); ?>
+                    </div>
+                </div>
+            
+                <!--- Footer -->
+                <?php require_once("view/footer.php"); ?>
+                
+                ';
+            }
+        ?>
 
-        <!-- Body -->
-        <div class="container-fluid">
-            <div class="row">
-                <?php require_once('view/filter.php');  require_once('view/body.php'); ?>
-            </div>
-        </div>
-
-        <!--- Footer -->
-        <?php require_once('view/footer.php'); ?>
 
     </body>
 </html>

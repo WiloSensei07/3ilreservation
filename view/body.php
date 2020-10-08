@@ -1,6 +1,13 @@
 
 <div class="col-lg-10" style="background-color: white;">
-    </br></br></br>
-    <h3>Contenu de la page</h3>
-    </br></br></br>
+    <?php
+        if($_SESSION['role'] == 'etudiant')
+        {
+            require_once('homebooking.php');
+
+        }elseif($_SESSION['role'] == 'admin')
+        {
+            require_once('homeadmin.php');
+        }
+    ?>
 </div>

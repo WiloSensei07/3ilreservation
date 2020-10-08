@@ -1,3 +1,7 @@
+<?php
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -8,17 +12,17 @@
     </head>
     <body>
         <section class="login-page">
-            <form action="" method="post">
+            <form action="../controller/loginphp.php" method="post">
                 <div class="box">
                     <div class="form-head">
                         <h2> Member Login</h2>
                     </div>
                     <div class="form-body">
-                        <input type="text" name="login" id="" placeholder="Enter name">
-                        <input type="password" name="password" id="" placeholder="Password">
+                        <input type="text" name="email" id="" placeholder="Enter name" required>
+                        <input type="password" name="password" id="" placeholder="Password" required>
                     </div>
                     <div class="form-footer">
-                        <button type="submit">Sign In</button>
+                        <button type="submit" name="connexion">Sign In</button>
                     </div>
                 </div>
             </form>

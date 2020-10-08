@@ -4,7 +4,7 @@
     <div class="container-fluid padding">
         <div class="row text-center">
             <div class="col-md-4">
-                <img src="img/logo-3il-groupe1.png" >
+                <img src="../img/logo-3il-groupe1.png" >
                 <hr class="light" color="beige">
                 <p>0753756979</p>
                 <p>3il@3il.fr</p>

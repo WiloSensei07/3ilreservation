@@ -23,11 +23,12 @@ if( isset($_POST['connexion']) ) {
     }
 }
 
-if(isset($_POST['logout']))
+if(isset($_POST['deconnexion']))
 {
     $dbh = NULL;
+    unset($_SESSION);
     session_destroy();
-    header('location: index.php');
+    header('location: ../index.php');
 }
 
 

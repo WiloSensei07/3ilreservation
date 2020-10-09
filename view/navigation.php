@@ -1,5 +1,5 @@
 <!-- Navigation -->
-<nav class="navbar navbar-expand-md navbar-light  sticky-top" style="background-color: gray;">
+<nav class="navbar navbar-expand-md navbar-light  sticky-top" style="background-color: #d9d6d6;">
     <div class="container-fluid">
         <a class="navbar-brand" href="index2.php"><img src="../img/logo-3il-groupe1.png" alt="Logo 3il"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
@@ -20,7 +20,9 @@
                 ?>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#" style="background-color: deepskyblue; border-radius: 10px;">Déconnexion</a>
+                <form action="../controller/loginphp.php" method="post">
+                    <button type="submit" class="btn btn-primary" name="deconnexion" style="border-radius: 10px;">Déconnexion</button>
+                </form>
             </li>
         </ul>
     </div>

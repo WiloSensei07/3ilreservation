@@ -1,5 +1,5 @@
 
-<div class="col-lg-2" style="background-color: #b7b2b2;">
+<div class="col-lg-2" style="background-color: #888888;">
 
 
     <?php

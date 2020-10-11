@@ -3,6 +3,7 @@
     
     namespace  backEndAccueil
     {
+
         function listeSalle()
         {
             require'connect.php';
@@ -44,23 +45,24 @@
             
                 <!-- Button trigger modal -->
                 
-                
                 <!-- Modal -->
                 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                   <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                       <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                        <h5 class="modal-title" id="exampleModalLongTitle">Confirmer votre reservation</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                           <span aria-hidden="true">&times;</span>
                         </button>
                       </div>
                       <div class="modal-body">
-                        ...
+                        <p>Date: 10-10-2020</p>
+                        <p>De: 08h30</p>
+                        <p>A: 10h00</p>
                       </div>
                       <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                        <button type="button" class="btn btn-primary">Confirmer</button>
                       </div>
                     </div>
                   </div>
@@ -68,6 +70,17 @@
             
             
             ';
+        }
+
+        function filterHoursOption()
+        {
+            require'connect.php';
+            $requette = $dbh->prepare('SELECT * FROM creneau');
+            $requette->execute();
+            while($creneau = $requette->fetch())
+            {
+                echo ' <option value="'.$creneau['id'].'">'.$creneau['heure_d'].'-'.$creneau['heure_f'].'</option>  ';
+            }
         }
     }
 

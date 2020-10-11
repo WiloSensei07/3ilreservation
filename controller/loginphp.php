@@ -48,10 +48,10 @@ function hash_password($dbh)
         echo "</br></br>"."requette Okay      ";
     }
 
-    while( $result = $req->fetch() )
+    /*while( $result = $req->fetch() )
     {
         print_r($result['id']."-----".$result['login']."-------".$result['password']);
         echo"</br></br>";
-    }
+    }*/
 }
 ?>

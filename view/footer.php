@@ -1,6 +1,6 @@
 
 <!--- Footer -->
-<footer style="background-color: gray;">
+<footer style="background-color: #1d1c1c; color: white">
     <div class="container-fluid padding">
         <div class="row text-center">
             <div class="col-md-4">

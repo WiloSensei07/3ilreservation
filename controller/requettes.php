@@ -16,19 +16,22 @@
                     $message = 'place disponible';
                     $color = '#209708';
                     $bouton = 'enabled';
+                    $blur = 0;
                 }elseif($salle['nb_place'] > 1)
                 {
                     $message = 'places disponibles';
                     $color = '#209708';
                     $bouton = 'enabled';
+                    $blur = 0;
                 }elseif($salle['nb_place'] == 0)
                 {
                     $message = 'place disponible';
                     $color = 'red';
                     $bouton = 'disabled';
+                    $blur = 1;
                 }
                 echo '
-                    <div class="col" style="padding-bottom: 15px;">
+                    <div class="col" style="padding-bottom: 15px; filter: blur('.$blur.'px);">
                         <div class="card" style="width: 18rem; border-radius: 20px; border-color: '.$color.';">
                             <img class="card-img-top" src="../img/salle1.jpg" alt="Card image cap" style="border-top-left-radius: 20px; border-top-right-radius: 20px;">
                             <div class="card-body text-center">

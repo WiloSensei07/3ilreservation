@@ -1,6 +1,7 @@
 
-<div class="col-lg-10" style="background-color: white;">
-    <?php
+<div class="col-lg-10 background">
+    <div class="box">
+        <?php
         if($_SESSION['role'] == 'etudiant')
         {
             require_once('homebooking.php');
@@ -9,5 +10,6 @@
         {
             require_once('homeadmin.php');
         }
-    ?>
+        ?>
+    </div>
 </div>

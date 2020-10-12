@@ -1,5 +1,5 @@
 
-<div class="col-lg-2" style="background-color: #888888;">
+<div class="col-lg-2" style="background-color: #323131; color: white">
     <br>
     <?php
         if($_SESSION['role'] == 'etudiant')
@@ -15,7 +15,7 @@
     <div class="form-group row">
         <label for="example-date-input" class="col-2 col-form-label">Date</label>
         <div class="col-10">
-            <input class="form-control" type="date" id="example-date-input">
+            <input class="form-control" type="date" id="example-date-input" onchange="pickHours()">
         </div>
     </div>
     <br>
@@ -36,3 +36,11 @@
     <br>
 
 </div>
+
+<script>
+    function pickHours()
+    {
+        let heure = document.getElementById('example-date-input').value();
+        alert(heure);
+    }
+</script>

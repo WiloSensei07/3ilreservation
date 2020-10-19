@@ -1,4 +1,11 @@
 <?php
     session_start();
-    header('location: view/login.php');
+
+    if(($_SESSION['id'] == null ))
+    {
+        header('location: view/index2.php');
+    }else
+    {
+        header('location: view/login.php');
+    }
 ?>

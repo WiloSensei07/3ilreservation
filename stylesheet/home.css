@@ -1,4 +1,21 @@
+nav
+{
+    background-color: #1d1c1c;
+}
 
+.navbar-li
+{
+    color: white;
+}
+
+.navbar-li-btn
+{
+
+}
+
+
+
+/*
 .background
 {
     background-image: url('../img/background.jpg');
@@ -7,28 +24,17 @@
     background-repeat: no-repeat;
     background-position: center center;
     height: 100%;
-    filter: blur(0px);
 }
+*/
 
  h3
 {
     color: #ffffff;
 }
 
-/*.background:after
-{
-    content: '';
-    position: absolute;
-    left: 0px;
-    top: 0px;
-    height: 100%;
-    width: 100%;
-    background-color: rgba(0, 0, 0, .5);
-    z-index: 1;
-}*/
 
 .box
 {
     z-index: 2;
-    background-color: rgba(0, 0, 0, .5);
+    /*background-color: rgba(0, 0, 0, .5);*/
 }

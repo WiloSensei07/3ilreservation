@@ -9,6 +9,9 @@
         }elseif($_SESSION['role'] == 'admin')
         {
             require_once('homeadmin.php');
+        }else
+        {
+            echo 'paul';
         }
         ?>
     </div>

@@ -13,54 +13,8 @@
             {
                afficheSalle($salle);
             }
-
-            echo '
-            
-                <!-- Button trigger modal -->
-                
-                <!-- Modal -->
-                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                  <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">Confirmer votre reservation</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <div class="modal-body">
-                        <p>Date: 10-10-2020</p>
-                        <p>De: 08h30</p>
-                        <p>A: 10h00</p>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                        <button type="button" class="btn btn-primary">Confirmer</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-            
-            
-            ';
         }
 
-        function listeSalleFiltre($date)
-        {
-            require'connect.php';
-            $req1 = $dbh->prepare('SELECT * FROM horaire WHERE date = ?');
-            $req1->execute(array($date));
-            while($horaire = $req1->fetch())
-            {
-                $req2 = $dbh->prepare('SELECT * FROM salles WHERE id = ?');
-                $req2->execute(array($horaire['id']));
-                while($salle = $req2->fetch())
-                {
-                    afficheSalle($salle);
-                }
-
-            }
-        }
 
         function filterHoursOption()
         {
@@ -72,6 +26,7 @@
                 echo ' <option value="'.$creneau['id'].'">'.$creneau['heure_d'].'-'.$creneau['heure_f'].'</option>  ';
             }
         }
+
 
         function afficheSalle($salle)
         {
@@ -92,7 +47,7 @@
                 $message = 'place disponible';
                 $color = 'red';
                 $bouton = 'disabled';
-                $blur = 1;
+                $blur = 0;
             }
             echo '
                     <div class="col" style="padding-bottom: 15px; filter: blur('.$blur.'px);">
@@ -101,13 +56,165 @@
                             <div class="card-body text-center">
                                 <h5 class="card-title">'.$salle['numero'].'</h5>
                                 <p class="card-text" style="color: '.$color.';">'.$salle['nb_place'].' '.$message.'</p>
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" '.$bouton.'>Reserver</button>
-                                <p id="date">paul</p>
+                                <input type="hidden" id="idHoraire" value="">
+                                <input type="hidden" id="idCreneau" value="">
+                                <button type="button" class="btn btn-primary" id="'.$salle['id'].'" data-toggle="modal" 
+                                    data-target="#exampleModalCenter" '.$bouton.' onclick="data(this.id)"> Reserver
+                                </button>
                             </div>
                         </div>
                     </div>
                 ';
+
+
+            if(!empty($_SESSION['date-filter']))
+            {
+                $dateReservation = $_SESSION['date-filter'];
+            }else
+            {
+                $dateReservation = 'Date non choisie';
+                $creneauReservation = 'Pas de créneau a la datechoisie';
+            }
+
+            if(!empty($_SESSION['creneau-filter']))
+            {
+                $creneauReservation = $_SESSION['creneau-filter'];
+            }else
+            {
+                $creneauReservation = 'Creneau vide: select option a venir';
+            }
+
+
+
+            echo '
+            
+                <!-- Button trigger modal -->
+                
+                <!-- Modal -->
+            <form id="confirmReservation">
+                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Confirmer votre reservation</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body" >
+                      
+                        <input type="hidden" name="dateVal" id="dateVal" value="'.$dateReservation.'">
+                        <input type="hidden" name="creneauVal" id="idCreneau" value="">
+                        
+                        <p>Date : '.$dateReservation.'</p>
+                        <p>Heure : '.$creneauReservation.'</p>
+                            <!-- <div class="form-group row">
+                                <label for="example-date-input" class="col-2 col-form-label">Date</label>
+                                <div class="col-10">
+                                    <p></p>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="form-group row">
+                                <label class="col-2 col-form-label">Heure</label>
+                                <div class="col-10">
+                                    <select class="form-control" id="creneau" >
+                                        <option value="" selected>Choix du créneau</option>
+                                        <option value="1" >08h-10h00</option>
+                                        <option value="2" >10h30-12h00</option>
+                                        <option value="3" >13h30-15h00</option>
+                                        <option value="4" >15h1516h45</option>
+                                    </select>
+                                </div>
+                            </div> -->
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                        <button type="Submit" class="btn btn-primary">Confirmer</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </form>
+            
+            
+            ';
         }
+
+        function filterCreneauOption($date)
+        {
+            require'connect.php';
+            $requette = $dbh->prepare('SELECT * FROM horaire WHERE date = ?');
+            $requette->execute(array($date));
+            $creneau1 = 0;
+            $creneau2 = 0;
+            $creneau3 = 0;
+            $creneau4 = 0;
+            while($horaire = $requette->fetch())
+            {
+                if($horaire['creneau1'] == 1)
+                {
+                    $creneau1 = 1;
+                }else if($horaire['creneau1'] == 0)
+                {
+                    $creneau1 = 0;
+                }
+
+                if($horaire['creneau2'] == 1)
+                {
+                    $creneau2 = 2;
+                }else if($horaire['creneau2'] == 0)
+                {
+                    $creneau2 = 0;
+                }
+
+                if($horaire['creneau3'] == 1)
+                {
+                    $creneau3 = 3;
+                }else if($horaire['creneau3'] == 0)
+                {
+                    $creneau3 = 0;
+                }
+
+                if($horaire['creneau4'] == 1)
+                {
+                    $creneau4 = 4;
+                }else if($horaire['creneau4'] == 0)
+                {
+                    $creneau4 = 0;
+                }
+            }
+
+            if($creneau1 == 1)
+            {
+                ajouterCreneau($creneau1);
+            }
+            if($creneau2 == 2)
+            {
+                ajouterCreneau($creneau2);
+            }
+            if($creneau3 == 3)
+            {
+                ajouterCreneau($creneau3);
+            }
+            if($creneau4 == 4)
+            {
+                ajouterCreneau($creneau4);
+            }
+
+        }
+
+        function ajouterCreneau($idCreneau)
+        {
+            require'connect.php';
+            $requette = $dbh->prepare('SELECT * FROM creneau WHERE id = ?');
+            $requette->execute(array($idCreneau));
+            while($creneau = $requette->fetch())
+            {
+                echo ' <option value="'.$creneau['id'].'">'.$creneau['heure_d'].'-'.$creneau['heure_f'].'</option>  ';
+            }
+        }
+
     }
 
 ?>

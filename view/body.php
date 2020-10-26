@@ -11,7 +11,7 @@
             require_once('homeadmin.php');
         }else
         {
-            echo 'paul';
+            echo "Erreur de droit d'accès: body";
         }
         ?>
     </div>

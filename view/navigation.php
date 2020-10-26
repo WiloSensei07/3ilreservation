@@ -2,9 +2,6 @@
 <nav class="navbar navbar-expand-md sticky-top">
     <div class="container-fluid">
         <a class="navbar-brand" href="index2.php"><img src="../img/logo-3il-groupe1.png" alt="Logo 3il"></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
-            <span class="navbar-toggler-icon"></span>
-        </button>
     </div>
     <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">

@@ -10,10 +10,10 @@
 </div>
 
 <script>
-    function reserver()
+    function idSalle(id)
     {
-        let date = document.getElementById('date-val').val ;
-        console.log('date de reeservation '+date);
+        let idsalle = document.getElementById('idUtilisateur').value = id;
+        //console.log('id salle a reserver '+idsalle);
         //document.getElementById('date-confirm').innerHTML = date ;
     }
 </script>

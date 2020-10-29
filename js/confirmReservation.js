@@ -1,6 +1,7 @@
 document.getElementById('confirmReservation').addEventListener("submit", function (e){
     e.preventDefault();
 
+
     // Dans le cas ou on veut recupérer tous les données de notre form sans avoir a
     // faire le document.getElementById pour chaque input
     var data = new FormData(this);  // recupère automatic tous les entrées de notre form

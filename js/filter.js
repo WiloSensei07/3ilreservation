@@ -40,7 +40,6 @@ function pickHours(idCreneau)
         document.getElementById('salle').innerHTML = arg;
     });
 
-    //document.getElementById('dateVal').value = date;
     document.getElementById('idCreneau').value = idCreneau;
 }
 

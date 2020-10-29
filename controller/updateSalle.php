@@ -15,6 +15,7 @@
         $req1->execute(array($date));
         while($horaire = $req1->fetch())
         {
+            $_SESSION['idHoraire'] = $horaire['id'];
             $req2 = $dbh->prepare('SELECT * FROM salles WHERE id = ?');
             $req2->execute(array($horaire['id']));
             while($salle = $req2->fetch())

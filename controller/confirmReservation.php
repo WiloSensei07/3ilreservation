@@ -3,22 +3,24 @@
     // Confirmation de la reservation
 
     //echo json_encode($_POST);
+    //require_once 'connect.php';
 
+    echo 'paul';
+/*
     $sucess = 0;
     $msg = "Une erreur est survenu (confirmReservation.php)";
     $data = [];
 
-    if(!empty($_POST['dateVal']) AND !empty($_POST['creneauVal']) )
+    if(!empty($_POST['dateVal']) AND !empty($_POST['idCreneau']) )
     {
-        $dateVal = $_POST['dateVal'];
-        $creneauVal = $_POST['creneauVal'];
+        //$dateVal = $_POST['dateVal'];
+        //$idCreneau = $_POST['creneauVal'];
 
-        $idUtilisateur = '';
-        $idHoraire = '';
-        $idCreneau = '';
+        $idUtilisateur = $_SESSION['id'];
+        $idHoraire = $_POST['idHoraire'];
+        $idCreneau = $_POST['idCreneau'];
 
         // Ajout d'une reservation en base de données
-        require_once 'connect.php';
         $req = $dbh->prepare('INSERT INTO reservation (idUtiliateur, idHoraire, idCreneau) VALUES(:idUtilisateur, :idHoraire, :idCreneau)');
         $req->execute(array(
             'idUtilisateur' => $idUtilisateur,
@@ -31,9 +33,10 @@
 
     }else
     {
-        $msg = "Veuillez renseigner tous les champs";
+        $msg = "Un probleme est survenu lors de la reservation";
     }
-
+*/
     // Envoie des données a notre fichier script
-    $res = ["success" => $sucess, "msg" => $msg, "data" => $data];
+    /*$res = ["success" => $sucess, "msg" => $msg, "data" => $data];
     echo json_encode($res);
+    */

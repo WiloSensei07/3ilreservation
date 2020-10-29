@@ -59,7 +59,7 @@
                                 <input type="hidden" id="idHoraire" value="">
                                 <input type="hidden" id="idCreneau" value="">
                                 <button type="button" class="btn btn-primary" id="'.$salle['id'].'" data-toggle="modal" 
-                                    data-target="#exampleModalCenter" '.$bouton.' onclick="data(this.id)"> Reserver
+                                    data-target="#exampleModalCenter" '.$bouton.' onclick="idSalle(this.id)"> Reserver
                                 </button>
                             </div>
                         </div>
@@ -91,7 +91,6 @@
                 <!-- Button trigger modal -->
                 
                 <!-- Modal -->
-            <form id="confirmReservation">
                 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                   <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
@@ -101,11 +100,13 @@
                           <span aria-hidden="true">&times;</span>
                         </button>
                       </div>
-                      <div class="modal-body" >
                       
-                        <input type="hidden" name="dateVal" id="dateVal" value="'.$dateReservation.'">
-                        <input type="hidden" name="creneauVal" id="idCreneau" value="">
-                        
+            <form id="" action="confirmReservation.php" method="post">
+                      <div class="modal-body" >
+                        <input type="text" name="dateVal" id="dateVal" value="d'.$dateReservation.'">
+                        <input type="text" name="idCreneau" id="idCreneau" value="id c">
+                        <input type="text" name="idUtilisateur" id="idUtilisateur" value="id u">
+                        <input type="text" name="idHoraire" id="idHoraire" value="id h'.$_SESSION['idHoraire'].'">
                         <p>Date : '.$dateReservation.'</p>
                         <p>Heure : '.$creneauReservation.'</p>
                             <!-- <div class="form-group row">
@@ -132,10 +133,11 @@
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
                         <button type="Submit" class="btn btn-primary">Confirmer</button>
                       </div>
+                      
+            </form>
                     </div>
                   </div>
                 </div>
-            </form>
             
             
             ';

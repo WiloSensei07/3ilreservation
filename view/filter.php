@@ -7,6 +7,7 @@
             echo ' <h4 class="text-center">Filtres</h4> ';
             $_SESSION['date-filter'] = "";
             $_SESSION['creneau-filter'] = "";
+            $_SESSION['idHoraire']= "";
 
         }elseif($_SESSION['role'] == 'admin')
         {

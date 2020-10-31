@@ -2,33 +2,34 @@
 DROP TABLE IF EXISTS `reservation`;
 DROP TABLE IF EXISTS `horaire`;
 DROP TABLE IF EXISTS `utilisateur`;
-DROP TABLE IF EXISTS `salles`;
+DROP TABLE IF EXISTS `salle`;
 DROP TABLE IF EXISTS `creneau`;
 
 --  table utilisateur---------------- 
 
 CREATE TABLE utilisateur (
             id          int             primary key 	not null,
-            login       varchar(255)    		not null   	,
+            login       varchar(255)    		not null    ,
             password    varchar(255)    		not null    ,
-            role        varchar(8)      		not null     
+            role        varchar(8)      		not null    , 
+            code_secret varchar(255)      		not null     
     );
 
 
---  table salles ---------------- 
+--  table salle ---------------- 
 
-CREATE TABLE salles (
-            id          int             primary key 	not null,
-            numero      int			    	not null   	,
-            nb_place    int			    	not null      
+CREATE TABLE salle (
+            id          int             primary key 	not null   ,
+            numero      int			    	not null   ,
+            nbplace     int			    	not null      
     );
 
 
 --  table creneau ---------------- 
 
 CREATE TABLE creneau (
-            id          int             primary key 	not null,
-            heure_d     varchar(10)			not null,
+            id          int             primary key 	not null   ,
+            heure_d     varchar(10)			not null   ,
             heure_f     varchar(10)			not null
     );
 
@@ -37,7 +38,7 @@ CREATE TABLE creneau (
 
 CREATE TABLE horaire (
             id          int           	not null,
-    	    idSalle	int		not null,
+    	    idsalle	int		not null,
             date     	DATE	   	not null,
     	    creneau1	int 		not null,
     	    creneau2	int 		not null,
@@ -51,11 +52,11 @@ CREATE TABLE horaire (
 
 CREATE TABLE reservation (
             id          	int           	not null,
-    	    idUtilisateur	INT		not null,
-    	    idHoraire		INT		not null,
-    	    idCreneau		INT		not null,
-    	    PRIMARY KEY(id) ,
-    	    FOREIGN KEY(idUtilisateur) REFERENCES utilisateur(id) ,
-            FOREIGN KEY(idHoraire) REFERENCES horaire(id),
-            FOREIGN KEY(idCreneau) REFERENCES creneau(id)
+    	    idutilisateur	INT		not null,
+    	    idsalle		INT		not null,
+    	    date		date		not null,
+    	    creneau		varchar(255)	not null,
+    	    PRIMARY KEY(id)       ,
+    	    FOREIGN KEY(idutilisateur) REFERENCES utilisateur(id) ,
+            FOREIGN KEY(idsalle) REFERENCES salle(id) 
     );

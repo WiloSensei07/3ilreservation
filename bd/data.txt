@@ -3,33 +3,33 @@
 DELETE FROM `reservation`;
 DELETE FROM `horaire`;
 DELETE FROM `utilisateur`;
-DELETE FROM `salles`;
+DELETE FROM `salle`;
 DELETE FROM `creneau`;
 
 ALTER TABLE reservation AUTO_INCREMENT = 1;
 ALTER TABLE horaire AUTO_INCREMENT = 1;
 ALTER TABLE utilisateur AUTO_INCREMENT = 1;
-ALTER TABLE salles AUTO_INCREMENT = 1;
+ALTER TABLE salle AUTO_INCREMENT = 1;
 ALTER TABLE creneau AUTO_INCREMENT = 1;
 
-/************ table utilisateur******************/
-INSERT INTO `utilisateur` (`id`,`login`,`password`,`role`) VALUES 
-(1, "test@3il.fr","test1","etudiant"),
-(2, "erat.eget.tincidunt@etrutrum.net","test2","etudiant"),
-(3, "non.bibendum@commodoipsumSuspendisse.net","test3","etudiant"),
-(4, "volutpat.Nulla@parturientmontes.net","test4","etudiant"),
-(5, "ornare@egestasligulaNullam.ca","test5","etudiant"),
-(6, "ut.ipsum@sapien.net","test6","etudiant"),
-(7, "sollicitudin.adipiscing@eleifendnec.co.uk","test7","etudiant"),
-(8, "varius.orci@risusMorbi.net","test8","etudiant"),
-(9, "tellus.eu@semsemper.net","test9","etudiant"),
-(10, "admin@3il.fr","admin","admin");
+-- table utilisateur ------------------------
+INSERT INTO `utilisateur` (`id`,`login`,`password`,`role`, `code_secret`) VALUES 
+(1, "test@3il.fr","test1","etudiant", ""),
+(2, "erat.eget.tincidunt@etrutrum.net","test2","etudiant", ""),
+(3, "non.bibendum@commodoipsumSuspendisse.net","test3","etudiant", ""),
+(4, "volutpat.Nulla@parturientmontes.net","test4","etudiant", ""),
+(5, "ornare@egestasligulaNullam.ca","test5","etudiant", ""),
+(6, "ut.ipsum@sapien.net","test6","etudiant", ""),
+(7, "sollicitudin.adipiscing@eleifendnec.co.uk","test7","etudiant", ""),
+(8, "varius.orci@risusMorbi.net","test8","etudiant", ""),
+(9, "tellus.eu@semsemper.net","test9","etudiant", ""),
+(10, "admin@3il.fr","admin","admin", "");
 
 
 
 
-/************ table salles ******************/
-INSERT INTO `salles` (`id`,`numero`,`nb_place`) VALUES 
+-- table salle ------------------------
+INSERT INTO `salle` (`id`,`numero`,`nbplace`) VALUES 
 (1,100,9),
 (2,101,0),
 (3,102,16),
@@ -43,7 +43,7 @@ INSERT INTO `salles` (`id`,`numero`,`nb_place`) VALUES
 
 
 
-/************ table creneau ******************/
+-- table creneau ------------------------
 INSERT INTO `creneau` (`id`,`heure_d`,`heure_f`) VALUES 
 (1,'08h00','10h00'),
 (2,'10h30','12h00'),
@@ -54,7 +54,7 @@ INSERT INTO `creneau` (`id`,`heure_d`,`heure_f`) VALUES
 
 
 
-/************ table horaire******************/
+-- table horaire ------------------------
 INSERT INTO `horaire` (`id`,`idsalle`,`date`,`creneau1`,`creneau2`,`creneau3`,`creneau4`) VALUES 
 (1,  1,  '2020-10-02', 1,0,0,1),
 (2,  2,  '2020-10-02', 1,1,1,1),
@@ -69,11 +69,9 @@ INSERT INTO `horaire` (`id`,`idsalle`,`date`,`creneau1`,`creneau2`,`creneau3`,`c
 
 
 
-/************ table reservation******************/
-INSERT INTO `reservation`(`id`, `idutilisateur`, `idhoraire`, `idcreneau`) VALUES 
-(1, 1, 1, 1),
-(2, 2, 2, 3),
-(3, 3, 3, 4),
-(4, 4, 4, 3),
-(5, 5, 2, 2);
+-- table reservation ------------------------
+INSERT INTO `reservation`(`id`, `idutilisateur`, `idsalle`, `date`, `creneau`) VALUES 
+(1, 1, 1, '2020-10-02', '08h30-10h00'),
+(2, 2, 2, '2020-10-02', '15h15-16h45'),
+(3, 3, 3, '2020-10-03', '08h30-10h00');
 

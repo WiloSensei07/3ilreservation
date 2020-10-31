@@ -7,14 +7,15 @@ $login = $_POST['email'];
 $password = $_POST['password'];
 
 if( isset($_POST['connexion']) ) {
+    // hash_password($dbh);
     $req = $dbh->prepare( 'SELECT * FROM utilisateur WHERE login = ? ' );
     $req->execute( array( $login ) );
-    $data = $req->fetch();
+    $utilisateur = $req->fetch();
 
-    if( password_verify( $password, $data['password'] ) )
+    if( password_verify( $password, $utilisateur['password'] ) )
     {
-        $_SESSION['id'] = $data['id'];
-        $_SESSION['role'] = $data['role'];
+        $_SESSION['idUtilisateur'] = $utilisateur['id'];
+        $_SESSION['role'] = $utilisateur['role'];
         $_SESSION['login'] = true;
         header('location: ../view/index2.php');
     }else

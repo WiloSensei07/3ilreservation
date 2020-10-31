@@ -1,39 +1,20 @@
-document.getElementById('confirmReservation').addEventListener("submit", function (e){
-    e.preventDefault();
 
+function confirmReservation(nbplace)
+{
+    let idUtilisateur = document.getElementById('idUtilisateur').value ;
+    let idSalle = document.getElementById('idSalle').value ;
+    let dateReservation = document.getElementById('dateReservation').value ;
+    let creneauf = document.getElementById('creneauf').value ;
+    let newNbplace = nbplace - 1;
 
-    // Dans le cas ou on veut recupérer tous les données de notre form sans avoir a
-    // faire le document.getElementById pour chaque input
-    var data = new FormData(this);  // recupère automatic tous les entrées de notre form
+    let obj = { dateReservation: dateReservation, idUtilisateur: idUtilisateur, idSalle: idSalle, creneauf: creneauf, nbplace: newNbplace}
 
-    let xhr = new XMLHttpRequest();
-
-    xhr.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200)
-        {
-            console.log(this.response);
-            let res = this.response;
-            if(res.success)
-            {
-                console.log("Utilisateur inscrit !");
-                alert("Utilisateur inscrit !");
-            }else
-            {
-                alert(res.msg);
-            }
-        }else if(this.readyState == 4)
-        {
-            alert("Une erreur est survenue...");
-        }
-    };
-
-    xhr.open("POST", "../controller/confirmReservation.php", true);
-
-    xhr.responseType = "json";
-
-    // Envoie de la requette
-    xhr.send(data);
-
-
-    return false; // pour etre sur d'eviter le comportement par défaut
-});
+    $.ajax({
+        url: "../controller/confirmReservation.php",
+        type:"GET",
+        data:obj
+    }).done(function( arg ) {
+        document.getElementById('confirm').innerHTML = arg
+        console.log('Reception okay  : '+arg);
+    });
+}

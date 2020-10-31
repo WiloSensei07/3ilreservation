@@ -10,12 +10,19 @@
 </div>
 
 <script>
-    function idSalle(id)
+    function idSalle(idSalle)
     {
-        let idsalle = document.getElementById('idUtilisateur').value = id;
-        //console.log('id salle a reserver '+idsalle);
-        //document.getElementById('date-confirm').innerHTML = date ;
+        document.getElementById('idSalle').value = idSalle;
+
+        /*var txt;
+        if (confirm("Press a button!")) {
+            txt = "You pressed OK !";
+        } else {
+            txt = "You pressed Cancel!";
+        }
+        document.getElementById("demo").innerHTML = txt;*/
+
     }
 </script>
 
-<script src="../stylesheet/confirmReservation.js"></script>
+<script src="../js/confirmReservation.js"></script>

@@ -1,42 +1,49 @@
 <?php
 
-    // Confirmation de la reservation
+    $date = $_GET['dateReservation'];
+    $idutilisateur = $_GET['idUtilisateur'];
+    $idsalle = $_GET['idSalle'];
+    $creneauf = $_GET['creneauf'];
+    $newNbplace = $_GET['nbplace'];
 
-    //echo json_encode($_POST);
-    //require_once 'connect.php';
+    confirmationReservation($idutilisateur, $idsalle, $date, $creneauf,$newNbplace, $newNbplace);
 
-    echo 'paul';
-/*
-    $sucess = 0;
-    $msg = "Une erreur est survenu (confirmReservation.php)";
-    $data = [];
-
-    if(!empty($_POST['dateVal']) AND !empty($_POST['idCreneau']) )
+    function verification($idutilisateur, $idsalle, $date, $creneau)
     {
-        //$dateVal = $_POST['dateVal'];
-        //$idCreneau = $_POST['creneauVal'];
+        require 'connect.php';
+        $req = $dbh->prepare('SELECT * FROM reservation WHERE idutilisateur = ? AND idsalle = ? AND date = ? AND creneau = ?');
+        $req->execute(array($idutilisateur, $idsalle, $date, $creneau));
+        $reservation = $req->fetch();
+        if(empty($reservation))
+        {
+            confirmationReservation($idutilisateur, $idsalle, $date, $creneau);
+            echo('<span style="color: green;">Salle reservé avec succès</span>');
+        }else
+        {
+            echo('<span style="color: red;">Créneau déja reservé</span>');
+        }
 
-        $idUtilisateur = $_SESSION['id'];
-        $idHoraire = $_POST['idHoraire'];
-        $idCreneau = $_POST['idCreneau'];
-
-        // Ajout d'une reservation en base de données
-        $req = $dbh->prepare('INSERT INTO reservation (idUtiliateur, idHoraire, idCreneau) VALUES(:idUtilisateur, :idHoraire, :idCreneau)');
-        $req->execute(array(
-            'idUtilisateur' => $idUtilisateur,
-            'idHoraire' => $idHoraire,
-            '$idCreneau' => $idCreneau
-        ));
-
-        $sucess = 1;
-        $msg = "Votre salle a bien été reservé !!";
-
-    }else
-    {
-        $msg = "Un probleme est survenu lors de la reservation";
     }
-*/
-    // Envoie des données a notre fichier script
-    /*$res = ["success" => $sucess, "msg" => $msg, "data" => $data];
-    echo json_encode($res);
-    */
+
+    function confirmationReservation($idutilisateur, $idsalle, $date, $creneau, $newNbplace)
+    {
+        // Ajout d'une reservation en base de données
+        require 'connect.php';
+        $req = $dbh->prepare('INSERT INTO reservation (idutilisateur, idsalle, date, creneau) VALUES(:idutilisateur, :idsalle, :date, :creneau)');
+        $req->execute(array(
+            'idutilisateur' => $idutilisateur,
+            'idsalle' => $idsalle,
+            'date' => $date,
+            'creneau' => $creneau
+        ));
+        updateSalle($idsalle, $newNbplace);
+        echo('<span style="color: green;">Salle reservé avec succès</span>');
+       // header('location: ../view/homebooking.php');
+    }
+
+    function updateSalle($idsalle, $newNbplace)
+    {
+        require 'connect.php';
+        $req2 = $dbh->prepare('UPDATE salle SET nbplace = ? WHERE id = ?');
+        $req2->execute(array($newNbplace, $idsalle));
+    }

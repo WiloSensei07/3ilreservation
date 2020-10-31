@@ -24,6 +24,7 @@
                     <div class="form-footer">
                         <button type="submit" name="connexion">Sign In</button>
                     </div>
+                    <a href="pseudo.php" style="color: white; "> Connexion par code </a>
                 </div>
             </form>
         </section>

@@ -30,8 +30,8 @@
 
         while($horaire = $req->fetch())
         {
-            $req2 = $dbh->prepare('SELECT * FROM salles WHERE id = ?');
-            $req2->execute(array(''.$horaire['idSalle']));
+            $req2 = $dbh->prepare('SELECT * FROM salle WHERE id = ?');
+            $req2->execute(array(''.$horaire['idsalle']));
             while($salle = $req2->fetch())
             {
                 requete\afficheSalle($salle);

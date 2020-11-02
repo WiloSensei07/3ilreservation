@@ -38,9 +38,11 @@ $_SESSION['mdp']=$code;
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../stylesheet/login.css">
     <title>Code</title>
 </head>
 <body >
+<section class="login-page">
 
 <div class="d-flex justify-content-center align-items-center h-100">
     <div class="card" style="width: 20rem; opacity:0.8">
@@ -127,5 +129,6 @@ $_SESSION['mdp']=$code;
     }
 
 </script>
+</section>
 </body>
 </html>

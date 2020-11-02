@@ -27,10 +27,10 @@
         <!-- Body -->
         <div class="container-fluid">
             <div class="row">
-                <?php require_once("filter.php");?>
-                </br></br></br>
-                <h3>Gestion de mes reservations </h3>
-                </br></br></br>
+                <?php
+                    require_once("filter2.php");
+                    require_once ("mesRervations.php")
+                ?>
             </div>
         </div>
 

@@ -14,7 +14,7 @@
 </div>
 
 <?php
-    echo '<input type="hidden" id="id_utilisateur" value="'.$_SESSION['idutilisateur'].'">';
+    echo '<input type="hidden" id="id_utilisateur" value="'.$_SESSION['idUtilisateur'].'">';
 ?>
 
 <script>

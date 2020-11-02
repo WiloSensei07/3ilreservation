@@ -8,6 +8,19 @@
         $_SESSION['idHoraire']= "";
     ?>
     <br>
+
+    <?php
+        if($_SESSION['role'] == 'admin')
+        {
+            echo '
+                <br>
+                <div class="form-group row">
+                    <img src="../img/geste-barriere1.jpg" style="width: 90%; margin: auto">
+                </div>
+            ';
+        }
+    ?>
+
     <div class="form-group row">
         <label for="example-date-input" class="col-2 col-form-label">Date</label>
         <div class="col-10">

@@ -25,6 +25,7 @@
                     <div class="form-body">
                         <input type="text" name="email" id="" placeholder="User name" required>
                         <input type="password" name="password" id="" placeholder="Password" required>
+                        <input type="hidden" name="csrf" value="" >
                     </div>
                     <div class="form-footer">
                         <button type="submit" name="connexion">Sign In</button>

@@ -32,9 +32,6 @@
         </table>
     </div>
     <br>
-    <div class="form-group row">
-        <img src="../img/geste-barriere1.jpg" style="width: 90%; margin: auto">
-    </div>
 
 </div>
 

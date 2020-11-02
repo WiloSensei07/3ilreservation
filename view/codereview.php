@@ -1,11 +1,10 @@
 <?php
-session_start();
+    session_start();
 
-$code=array($_POST['code0'],$_POST['code1'],
-    $_POST['code2'],$_POST['code3'],
-    $_POST['code4'],$_POST['code5']);
-$pseudo=$_POST['pseudo'];
-require_once ('../controller/connect.php');
+    $code=array($_POST['code0'],$_POST['code1'], $_POST['code2'], $_POST['code3'], $_POST['code4'],$_POST['code5']);
+    $pseudo=$_POST['pseudo'];
+    require_once ('../controller/connect.php');
+
 function connectByCode($pseudo,$code){
     global $dbh;
     $req=$dbh->prepare('select * from utilisateur where login=:pseudo');
@@ -21,20 +20,28 @@ function connectByCode($pseudo,$code){
             password_verify($codeBd[3],$code[3]) &&
             password_verify($codeBd[4],$code[4]) &&
             password_verify($codeBd[5],$code[5])){
+
             if($data[0]['role']=='etudiant'){
-                $_SESSION['user']=$data[0];
+                $_SESSION['login'] = true;
+                $_SESSION['role'] = 'etudiant';
+                $_SESSION['idutilisateur'] = $data[0]['id'];
                 return 1;
                 // le code 1 va m'aider à rediriger
                 //l'utilisateur vers sa page en fonction de ses acces
             }
             elseif($data[0]['role']=='admin'){
-                $_SESSION['role']=$data[0]['role'];
+                $_SESSION['role']=$data[0]['role']; $_SESSION['login'] = true;
+                $_SESSION['role'] = 'admin';
+                $_SESSION['idUtilisateur'] = $data[0]['id'];
                 return 2;
             }
 
         }
         else{
             $_SESSION['role']='aucun';
+            $_SESSION['login'] = false;
+            $_SESSION['role'] = '';
+            $_SESSION['idUtilisateur'] = '';
             return 3;
 
         }
@@ -42,6 +49,9 @@ function connectByCode($pseudo,$code){
     }
     else{
         $_SESSION['role']='aucun';
+        $_SESSION['login'] = false;
+        $_SESSION['role'] = '';
+        $_SESSION['idUtilisateur'] = '';
         return 4;
 
     }

@@ -1,3 +1,7 @@
+<?php
+    // session_start();
+?>
+
 <br>
 <h3 class="text-center" style="color: #1d1c1c">Liste des salles de TP </h3><br>
 
@@ -10,7 +14,7 @@
 </div>
 
 <?php
-    echo '<input type="hidden" id="id_utilisateur" value="'.$_SESSION['idUtilisateur'].'">';
+    echo '<input type="hidden" id="id_utilisateur" value="'.$_SESSION['idutilisateur'].'">';
 ?>
 
 <script>
@@ -27,6 +31,7 @@
             data:obj
         }).done(function( arg ) {
             console.log(arg);
+            console.log(arg[2]+arg[3]+arg[4]);
             document.getElementById('numeroSalle').innerText = arg[2]+arg[3]+arg[4];
         });
     }

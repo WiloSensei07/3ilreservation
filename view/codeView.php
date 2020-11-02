@@ -42,35 +42,39 @@ $_SESSION['mdp']=$code;
     <title>Code</title>
 </head>
 <body >
+
+
 <section class="login-page">
+    <div class="box">
+        <div class="d-flex justify-content-center align-items-center h-100">
+            <div class="card" style="width: 20rem; opacity:0.8">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Code secret</h5>
 
-<div class="d-flex justify-content-center align-items-center h-100">
-    <div class="card" style="width: 20rem; opacity:0.8">
-        <div class="card-body">
-            <h5 class="card-title text-center">Code secret</h5>
+                    <div class="row">
+                        <?php
+                        $k=0;
+                        for($i=0;$i<10;$i++){
+                            ?>
+                            <div class="col m-2"><button class="btn btn-secondary" onclick="saisir('<?=$code[array_keys($code)[$i]]?>')" ><?=array_keys($code)[$i]?></button></div>
+                            <?php
+                        }
+                        ?>
+                    </div>
 
-            <div class="row">
-                <?php
-                $k=0;
-                for($i=0;$i<10;$i++){
-                    ?>
-                    <div class="col m-2"><button class="btn btn-secondary" onclick="saisir('<?=$code[array_keys($code)[$i]]?>')" ><?=array_keys($code)[$i]?></button></div>
-                    <?php
-                }
-                ?>
+                    <div class="row justify-content-around mt-3">
+                        <div class="col-4"><a href="#" class="btn btn-primary" onclick="valider()">Valider</a></div>
+                        <div class="col-4"><a href="#" class="btn btn-danger" onclick="effacer()">X</a></div>
+                    </div>
+                    <div class="form-group mt-2">
+                        <input type="text" class="form-control" disabled id="codeV" >
+                    </div>
+
+                </div>
             </div>
-
-            <div class="row justify-content-around mt-3">
-                <div class="col-4"><a href="#" class="btn btn-primary" onclick="valider()">Valider</a></div>
-                <div class="col-4"><a href="#" class="btn btn-danger" onclick="effacer()">X</a></div>
-            </div>
-            <div class="form-group mt-2">
-                <input type="text" class="form-control" disabled id="codeV" >
-            </div>
-
         </div>
     </div>
-</div>
+</section>
 
 <script>
     let code=[];
@@ -110,10 +114,10 @@ $_SESSION['mdp']=$code;
             let page=response.data.page;
             switch (page){
                 case 1:
-                    document.location.href='homebooking.php';
+                    document.location.href='index2.php';
                     break;
                 case 2:
-                    document.location.href='homeadmin.php';
+                    document.location.href='index2.php';
                     break;
                 case 3:
                     document.location.href='codeView.php?pseudo='+response.data.pseudo;
@@ -129,6 +133,5 @@ $_SESSION['mdp']=$code;
     }
 
 </script>
-</section>
 </body>
 </html>

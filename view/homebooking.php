@@ -30,8 +30,6 @@
             type:"GET",
             data:obj
         }).done(function( arg ) {
-            console.log(arg);
-            console.log(arg[2]+arg[3]+arg[4]);
             document.getElementById('numeroSalle').innerText = arg[2]+arg[3]+arg[4];
         });
     }

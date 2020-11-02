@@ -1,5 +1,10 @@
 <?php
     session_start();
+
+    if($_SESSION['login'] == true)
+    {
+        header('location: ../view/index2.php');
+    }
 ?>
 
 <!DOCTYPE html>
@@ -18,7 +23,7 @@
                         <h2> Member Login</h2>
                     </div>
                     <div class="form-body">
-                        <input type="text" name="email" id="" placeholder="Enter name" required>
+                        <input type="text" name="email" id="" placeholder="User name" required>
                         <input type="password" name="password" id="" placeholder="Password" required>
                     </div>
                     <div class="form-footer">

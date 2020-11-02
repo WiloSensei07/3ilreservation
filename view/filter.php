@@ -2,17 +2,10 @@
 <div class="col-lg-2" style="background-color: #005067; color: white;">
     <br>
     <?php
-        if($_SESSION['role'] == 'etudiant')
-        {
-            echo ' <h4 class="text-center">Filtres</h4> ';
-            $_SESSION['date-filter'] = "";
-            $_SESSION['creneau-filter'] = "";
-            $_SESSION['idHoraire']= "";
-
-        }elseif($_SESSION['role'] == 'admin')
-        {
-            echo ' <h4 class="text-center">Liste des salles</h4> ';
-        }
+        echo ' <h4 class="text-center">Filtres</h4> ';
+        $_SESSION['date-filter'] = "";
+        $_SESSION['creneau-filter'] = "";
+        $_SESSION['idHoraire']= "";
     ?>
     <br>
     <div class="form-group row">

@@ -28,7 +28,15 @@
         <!-- Body -->
         <div class="container-fluid">
             <div class="row">
-                <?php require_once("filter.php");  require_once("body.php"); ?>
+                <?php
+                    if($_SESSION['role'] == 'etudiant')
+                    {
+                        require_once("filter.php");  require_once("body.php");
+                    }else if($_SESSION['role'] == 'admin')
+                    {
+                        require_once("listeSalles.php");  require_once("body.php");
+                    }
+                ?>
             </div>
         </div>
 

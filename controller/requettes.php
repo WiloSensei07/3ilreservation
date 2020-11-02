@@ -2,7 +2,7 @@
     
     namespace  backEndAccueil
     {
-        session_start();
+        // session_start();
 
         function listeSalle()
         {
@@ -40,7 +40,7 @@
                 $message = 'places disponibles';
                 $color = '#209708';
                 $bouton = 'enabled';
-            }elseif($salle['nbplace'] == 0)
+            }elseif($salle['nbplace'] == 0 || $salle['nbplace'] < 1)
             {
                 $message = 'place disponible';
                 $color = 'red';
@@ -82,7 +82,7 @@
                 $active = 'enabled';
             }else
             {
-                $creneauReservation = 'Creneau vide: select option a venir';
+                $creneauReservation = 'Creneau vide';
                 $active = 'disabled';
             }
 
@@ -102,19 +102,21 @@
                         </button>
                       </div>
                       <div class="modal-body" >
-                            <form>
-                                <input type="hidden" name="idUtilisateur" id="idUtilisateur" value="'.$_SESSION['idUtilisateur'].'">
-                                <input type="hidden" name="idSalle" id="idSalle" value="">
-                                <input type="hidden" name="dateReservation" id="dateReservation" value="'.$dateReservation.'">
-                                <input type="hidden" name="creneauf" id="creneauf" value="'.$creneauReservation.'">
-                            </form>
+                            
+                            <input type="hidden" name="idUtilisateur" id="idUtilisateur" value="">
+                            <input type="hidden" name="idSalle" id="idSalle" value="">
+                            <input type="hidden" name="dateReservation" id="dateReservation" value="'.$dateReservation.'">
+                            <input type="hidden" name="creneauf" id="creneauf" value="'.$creneauReservation.'">
+                            
                             <div id="confirm">
+                                <p>Salle : <span id="numeroSalle"></span> </p>
                                 <p>Date : '.$dateReservation.'</p>
                                 <p>Heure : '.$creneauReservation.'</p>
                             </div>
                       </div>
                       <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="quitter" style="visibility: hidden;" onclick="rafraichir()">Quitter</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="annuler">Annuler</button>
                         <button type="button" class="btn btn-primary" '.$active.' id="'.$salle['nbplace'].'" onclick="confirmReservation(this.id)" >Confirmer</button>
                       </div>
                     </div>

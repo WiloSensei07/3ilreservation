@@ -6,9 +6,10 @@
     $creneauf = $_GET['creneauf'];
     $newNbplace = $_GET['nbplace'];
 
-    confirmationReservation($idutilisateur, $idsalle, $date, $creneauf,$newNbplace, $newNbplace);
+    // confirmationReservation($idutilisateur, $idsalle, $date, $creneauf,$newNbplace, $newNbplace);
+    verification($idutilisateur, $idsalle, $date, $creneauf, $newNbplace);
 
-    function verification($idutilisateur, $idsalle, $date, $creneau)
+    function verification($idutilisateur, $idsalle, $date, $creneau, $newNbplace)
     {
         require 'connect.php';
         $req = $dbh->prepare('SELECT * FROM reservation WHERE idutilisateur = ? AND idsalle = ? AND date = ? AND creneau = ?');
@@ -16,8 +17,12 @@
         $reservation = $req->fetch();
         if(empty($reservation))
         {
-            confirmationReservation($idutilisateur, $idsalle, $date, $creneau);
-            echo('<span style="color: green;">Salle reservé avec succès</span>');
+            $creneauf = $_GET['creneauf'];
+            confirmationReservation($idutilisateur, $idsalle, $date, $creneau, $newNbplace);
+            $reqx = $dbh->prepare('SELECT numero from salle WHERE id = ?');
+            $reqx->execute(array($idsalle));
+            $salle = $reqx->fetch();
+            echo('<span style="color: green;">Salle '.$salle['numero'].' reservé a '.$creneauf.' avec succès</span>');
         }else
         {
             echo('<span style="color: red;">Créneau déja reservé</span>');
@@ -37,7 +42,7 @@
             'creneau' => $creneau
         ));
         updateSalle($idsalle, $newNbplace);
-        echo('<span style="color: green;">Salle reservé avec succès</span>');
+        //echo('<span style="color: green;">Salle reservé avec succès</span>');
        // header('location: ../view/homebooking.php');
     }
 

@@ -1,7 +1,7 @@
 <?php
     session_start();
-
-    if(($_SESSION['id'] == null ))
+    $_SESSION['login'] = "";
+    if(($_SESSION['login'] == true ))
     {
         header('location: view/index2.php');
     }else

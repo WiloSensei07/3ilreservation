@@ -9,19 +9,26 @@
     ?>
 </div>
 
+<?php
+    echo '<input type="hidden" id="id_utilisateur" value="'.$_SESSION['idUtilisateur'].'">';
+?>
+
 <script>
     function idSalle(idSalle)
     {
         document.getElementById('idSalle').value = idSalle;
+        let idutilisateur = document.getElementById('id_utilisateur').value ;
+        document.getElementById('idUtilisateur').value = idutilisateur;
 
-        /*var txt;
-        if (confirm("Press a button!")) {
-            txt = "You pressed OK !";
-        } else {
-            txt = "You pressed Cancel!";
-        }
-        document.getElementById("demo").innerHTML = txt;*/
-
+        let obj = {id: idSalle}
+        $.ajax({
+            url: "../controller/test.php",
+            type:"GET",
+            data:obj
+        }).done(function( arg ) {
+            console.log(arg);
+            document.getElementById('numeroSalle').innerText = arg[2]+arg[3]+arg[4];
+        });
     }
 </script>
 

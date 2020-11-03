@@ -24,7 +24,7 @@ function connectByCode($pseudo,$code){
             if($data[0]['role']=='etudiant'){
                 $_SESSION['login'] = true;
                 $_SESSION['role'] = 'etudiant';
-                $_SESSION['idutilisateur'] = $data[0]['id'];
+                $_SESSION['idUtilisateur'] = $data[0]['id'];
                 return 1;
                 // le code 1 va m'aider à rediriger
                 //l'utilisateur vers sa page en fonction de ses acces

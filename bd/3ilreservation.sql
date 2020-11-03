@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : sam. 31 oct. 2020 à 19:14
+-- Généré le : mar. 03 nov. 2020 à 11:40
 -- Version du serveur :  8.0.21
 -- Version de PHP : 7.4.9
 
@@ -29,11 +29,11 @@ SET time_zone = "+00:00";
 
 DROP TABLE IF EXISTS `creneau`;
 CREATE TABLE IF NOT EXISTS `creneau` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `heure_d` varchar(10) NOT NULL,
   `heure_f` varchar(10) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `creneau`
@@ -53,7 +53,7 @@ INSERT INTO `creneau` (`id`, `heure_d`, `heure_f`) VALUES
 
 DROP TABLE IF EXISTS `horaire`;
 CREATE TABLE IF NOT EXISTS `horaire` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `idsalle` int NOT NULL,
   `date` date NOT NULL,
   `creneau1` int NOT NULL,
@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS `horaire` (
   `creneau4` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `idsalle` (`idsalle`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `horaire`
@@ -88,7 +88,7 @@ INSERT INTO `horaire` (`id`, `idsalle`, `date`, `creneau1`, `creneau2`, `creneau
 
 DROP TABLE IF EXISTS `reservation`;
 CREATE TABLE IF NOT EXISTS `reservation` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `idutilisateur` int NOT NULL,
   `idsalle` int NOT NULL,
   `date` date NOT NULL,
@@ -96,7 +96,7 @@ CREATE TABLE IF NOT EXISTS `reservation` (
   PRIMARY KEY (`id`),
   KEY `idutilisateur` (`idutilisateur`),
   KEY `idsalle` (`idsalle`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `reservation`
@@ -115,11 +115,11 @@ INSERT INTO `reservation` (`id`, `idutilisateur`, `idsalle`, `date`, `creneau`) 
 
 DROP TABLE IF EXISTS `salle`;
 CREATE TABLE IF NOT EXISTS `salle` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `numero` int NOT NULL,
   `nbplace` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `salle`
@@ -140,34 +140,48 @@ INSERT INTO `salle` (`id`, `numero`, `nbplace`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `salles`
+--
+
+DROP TABLE IF EXISTS `salles`;
+CREATE TABLE IF NOT EXISTS `salles` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `numero` int NOT NULL,
+  `nb_place` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `utilisateur`
 --
 
 DROP TABLE IF EXISTS `utilisateur`;
 CREATE TABLE IF NOT EXISTS `utilisateur` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `login` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `role` varchar(8) NOT NULL,
   `code_secret` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `utilisateur`
 --
 
 INSERT INTO `utilisateur` (`id`, `login`, `password`, `role`, `code_secret`) VALUES
-(1, 'test@3il.fr', '$2y$10$KamOCWd7MJ45hd6Amkw4he2kF2JfIz0VtRqCR7clXBIMlNBnQRP.O', 'etudiant', 'ZKA-XZB-YCR-DGF-WMK-FVX'),
-(2, 'erat.eget.tincidunt@etrutrum.net', '$2y$10$wiQ48ZuZyuTP/Vlzk8XYZ.ic4eevjAu0awkYmMxMbrPL6CE4kbAKq', 'etudiant', 'ZKA-DGF-FVX-AAB-BAD-ACD'),
-(3, 'non.bibendum@commodoipsumSuspendisse.net', '$2y$10$Cc.B4ONpz54yg.w61uUUa.dBjZirHuo/1dopuIXRapI24c9yp0ATC', 'etudiant', 'YCR-XZB-ZKA-ACD-BAD-AAB'),
-(4, 'volutpat.Nulla@parturientmontes.net', '$2y$10$mfT2Oz9hDM4hfyx425AFZecaj/GxchX.0o0LMZ445iZIBivAV5kCq', 'etudiant', '\'WMK-DGF-YCR-XZB-ZKA-ACD'),
-(5, 'ornare@egestasligulaNullam.ca', '$2y$10$AlePS7FmwkyCZHkPrOctfu9eufcP/wbC/02dadb9nLmLP957qdZ4O', 'etudiant', 'OYC-FVX-WMK-DGF-YCR-XZB'),
-(6, 'ut.ipsum@sapien.net', '$2y$10$1558969j/oxOBZuL1PhiS.MxfIYguRzINeGwBTwcxfKINJeDahdz6', 'etudiant', 'FVX-WMK-DGF-YCR-XZB-ZKA'),
-(7, 'sollicitudin.adipiscing@eleifendnec.co.uk', '$2y$10$kYwx0N7reU4nAAyA0LMMO.gVNeLB/7OD8ruDtxymZh2QqbgpZB5ji', 'etudiant', 'DGF-YCR-XZB-ZKA-ACD-BAD'),
-(8, 'varius.orci@risusMorbi.net', '$2y$10$rHSqEcWndUl9G5cs60y3cOCW00z3dkEGVDqlnAo5V0u.6RFPpB1/K', 'etudiant', 'DGF-WMK-YCR-XZB-ZKA-ACD'),
-(9, 'tellus.eu@semsemper.net', '$2y$10$RHry.SV27nvmKSgEYWd0tenh1K3Y74XWt1oDYovlUFCEZpYA8EBh6', 'etudiant', 'BAD-ACD-ZKA-ZKA-YCR-YCR'),
-(10, 'admin@3il.fr', '$2y$10$KqPJ9UBd2P4050RiHBuIB.2VaASzgfUpzdicllK.xYUy5Apke5fJG', 'admin', 'BAD-ACD-ZKA-XZB-YCR-DGF');
+(1, 'test@3il.fr', 'test1', 'etudiant', 'ZKA-XZB-YCR-DGF-WMK-FVX'),
+(2, 'erat.eget.tincidunt@etrutrum.net', 'test2', 'etudiant', 'ZKA-DGF-FVX-AAB-BAD-ACD'),
+(3, 'non.bibendum@commodoipsumSuspendisse.net', 'test3', 'etudiant', 'YCR-XZB-ZKA-ACD-BAD-AAB'),
+(4, 'volutpat.Nulla@parturientmontes.net', 'test4', 'etudiant', '\'WMK-DGF-YCR-XZB-ZKA-ACD'),
+(5, 'ornare@egestasligulaNullam.ca', 'test5', 'etudiant', 'OYC-FVX-WMK-DGF-YCR-XZB'),
+(6, 'ut.ipsum@sapien.net', 'test6', 'etudiant', 'FVX-WMK-DGF-YCR-XZB-ZKA'),
+(7, 'sollicitudin.adipiscing@eleifendnec.co.uk', 'test7', 'etudiant', 'DGF-YCR-XZB-ZKA-ACD-BAD'),
+(8, 'varius.orci@risusMorbi.net', 'test8', 'etudiant', 'DGF-WMK-YCR-XZB-ZKA-ACD'),
+(9, 'tellus.eu@semsemper.net', 'test9', 'etudiant', 'BAD-ACD-ZKA-ZKA-YCR-YCR'),
+(10, 'admin@3il.fr', 'admin', 'admin', 'BAD-ACD-ZKA-XZB-YCR-DGF');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

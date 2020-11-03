@@ -14,16 +14,16 @@ ALTER TABLE creneau AUTO_INCREMENT = 1;
 
 -- table utilisateur ------------------------
 INSERT INTO `utilisateur` (`id`,`login`,`password`,`role`, `code_secret`) VALUES 
-(1, "test@3il.fr","test1","etudiant", ""),
-(2, "erat.eget.tincidunt@etrutrum.net","test2","etudiant", ""),
-(3, "non.bibendum@commodoipsumSuspendisse.net","test3","etudiant", ""),
-(4, "volutpat.Nulla@parturientmontes.net","test4","etudiant", ""),
-(5, "ornare@egestasligulaNullam.ca","test5","etudiant", ""),
-(6, "ut.ipsum@sapien.net","test6","etudiant", ""),
-(7, "sollicitudin.adipiscing@eleifendnec.co.uk","test7","etudiant", ""),
-(8, "varius.orci@risusMorbi.net","test8","etudiant", ""),
-(9, "tellus.eu@semsemper.net","test9","etudiant", ""),
-(10, "admin@3il.fr","admin","admin", "");
+(1, "test@3il.fr","test1","etudiant", "ZKA-XZB-YCR-DGF-WMK-FVX"),
+(2, "erat.eget.tincidunt@etrutrum.net","test2","etudiant", "ZKA-DGF-FVX-AAB-BAD-ACD"),
+(3, "non.bibendum@commodoipsumSuspendisse.net","test3","etudiant", "YCR-XZB-ZKA-ACD-BAD-AAB"),
+(4, "volutpat.Nulla@parturientmontes.net","test4","etudiant", "'WMK-DGF-YCR-XZB-ZKA-ACD"),
+(5, "ornare@egestasligulaNullam.ca","test5","etudiant", "OYC-FVX-WMK-DGF-YCR-XZB"),
+(6, "ut.ipsum@sapien.net","test6","etudiant", "FVX-WMK-DGF-YCR-XZB-ZKA"),
+(7, "sollicitudin.adipiscing@eleifendnec.co.uk","test7","etudiant", "DGF-YCR-XZB-ZKA-ACD-BAD"),
+(8, "varius.orci@risusMorbi.net","test8","etudiant", "DGF-WMK-YCR-XZB-ZKA-ACD"),
+(9, "tellus.eu@semsemper.net","test9","etudiant", "BAD-ACD-ZKA-ZKA-YCR-YCR"),
+(10, "admin@3il.fr","admin","admin", "BAD-ACD-ZKA-XZB-YCR-DGF");
 
 
 

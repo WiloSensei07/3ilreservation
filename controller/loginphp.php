@@ -4,19 +4,19 @@
 
     // Mise en place du Token CSRF
     // 1) create a key for hash_hmac function
-    if(empty($_SESSION['key']))
-    {
-        $_SESSION['key'] = bin2hex(random_bytes(32));
-    }
+    //if(empty($_SESSION['key']))
+    //{
+      //  $_SESSION['key'] = bin2hex(random_bytes(32));
+    //}
 
     // create token CSRF
-    $csrf = hash_hmac('sh256', 'this is some string: index.php', $_SESSION['key']);
+    //$csrf = hash_hmac('sha256', 'this is some string: login.php', $_SESSION['key']);
 
     // Validate token
 
     if( isset($_POST['connexion']) ) {
-        //if(hash_equals($csrf, $_POST['csrf']))
-        //{
+        if(hash_equals($_SESSION['jeton'], $_POST['csrf']))
+        {
             require_once ('connect.php');
             $login = $_POST['email'];
             $password = $_POST['password'];
@@ -38,10 +38,10 @@
             {
                 echo 'mot de passe incorrec';
             }
-        //}else
-        //{
-            //echo 'CSRF Token failed ';
-        //}
+        }else
+        {
+            echo 'CSRF Token failed ';
+        }
 
 
     }

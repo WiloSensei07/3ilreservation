@@ -1,10 +1,28 @@
 <?php
     session_start();
 
+if(empty($_SESSION['key']))
+    $_SESSION['key'] = bin2hex(random_bytes(32));
+
+$csrf = hash_hmac('sha256', 'this is some string: logins.php', $_SESSION['key']);
+
+$_SESSION['jeton']=$csrf;
+
+//if( isset($_POST['connexion']) ) {
+//if(hash_equals($csrf, $_POST['csrf']))
+//{
     if($_SESSION['login'] == true)
     {
         header('location: ../view/index2.php');
     }
+//}else
+//{
+    //echo 'CSRF Token failed ';
+//}
+
+
+//}
+
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +43,7 @@
                     <div class="form-body">
                         <input type="text" name="email" id="" placeholder="User name" required>
                         <input type="password" name="password" id="" placeholder="Password" required>
-                        <input type="hidden" name="csrf" value="" >
+                        <input type="hidden" name="csrf" value="<?php echo $csrf ?>">
                     </div>
                     <div class="form-footer">
                         <button type="submit" name="connexion">Sign In</button>

@@ -8,20 +8,13 @@ $csrf = hash_hmac('sha256', 'this is some string: logins.php', $_SESSION['key'])
 
 $_SESSION['jeton']=$csrf;
 
-//if( isset($_POST['connexion']) ) {
-//if(hash_equals($csrf, $_POST['csrf']))
-//{
+
     if($_SESSION['login'] == true)
     {
         header('location: ../view/index2.php');
     }
-//}else
-//{
-    //echo 'CSRF Token failed ';
-//}
 
 
-//}
 
 ?>
 

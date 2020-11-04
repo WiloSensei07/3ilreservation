@@ -2,17 +2,7 @@
     session_start();
     $_SESSION['login'] = false;
 
-    // Mise en place du Token CSRF
-    // 1) create a key for hash_hmac function
-    //if(empty($_SESSION['key']))
-    //{
-      //  $_SESSION['key'] = bin2hex(random_bytes(32));
-    //}
 
-    // create token CSRF
-    //$csrf = hash_hmac('sha256', 'this is some string: login.php', $_SESSION['key']);
-
-    // Validate token
 
     if( isset($_POST['connexion']) ) {
         if(hash_equals($_SESSION['jeton'], $_POST['csrf']))

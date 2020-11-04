@@ -10,7 +10,7 @@
             if($_SESSION['token'] == $_POST['token'])
             {
                 //On stocke le timestamp qu'il était il y a 15 minutes
-                $timestamp_ancien = time() - (0.2*60);
+                $timestamp_ancien = time() - (0.1*60);
                 //Si le jeton n'est pas expiré
                 if($_SESSION['token_time'] >= $timestamp_ancien)
                 {
@@ -35,6 +35,10 @@
                     {
                         echo 'mot de passe incorrect';
                     }
+
+                }else
+                {
+                    echo 'Token time failed' ;
                 }
             }else
             {

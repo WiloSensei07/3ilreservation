@@ -1,12 +1,11 @@
 <?php
     session_start();
 
-if(empty($_SESSION['key']))
-    $_SESSION['key'] = bin2hex(random_bytes(32));
+  $token = uniqid(rand(), true);
 
-$csrf = hash_hmac('sha256', 'this is some string: logins.php', $_SESSION['key']);
+  $_SESSION['token'] = $token;
 
-$_SESSION['jeton']=$csrf;
+$_SESSION['token_time'] = time();
 
 
     if($_SESSION['login'] == true)
@@ -36,7 +35,9 @@ $_SESSION['jeton']=$csrf;
                     <div class="form-body">
                         <input type="text" name="email" id="" placeholder="User name" required>
                         <input type="password" name="password" id="" placeholder="Password" required>
-                        <input type="hidden" name="csrf" value="<?php echo $csrf ?>">
+                        <input type="hidden" name="token" value="<?php
+                        echo $token;
+                        ?>">
                     </div>
                     <div class="form-footer">
                         <button type="submit" name="connexion">Sign In</button>

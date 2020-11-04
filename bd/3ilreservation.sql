@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mar. 03 nov. 2020 à 11:40
--- Version du serveur :  8.0.21
+-- Généré le : mer. 04 nov. 2020 à 00:23
+-- Version du serveur :  5.7.31-log
 -- Version de PHP : 7.4.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -29,11 +29,11 @@ SET time_zone = "+00:00";
 
 DROP TABLE IF EXISTS `creneau`;
 CREATE TABLE IF NOT EXISTS `creneau` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `heure_d` varchar(10) NOT NULL,
   `heure_f` varchar(10) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `creneau`
@@ -53,32 +53,33 @@ INSERT INTO `creneau` (`id`, `heure_d`, `heure_f`) VALUES
 
 DROP TABLE IF EXISTS `horaire`;
 CREATE TABLE IF NOT EXISTS `horaire` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `idsalle` int NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `idsalle` int(11) NOT NULL,
   `date` date NOT NULL,
-  `creneau1` int NOT NULL,
-  `creneau2` int NOT NULL,
-  `creneau3` int NOT NULL,
-  `creneau4` int NOT NULL,
+  `nbplace` int(11) NOT NULL,
+  `creneau1` int(11) NOT NULL,
+  `creneau2` int(11) NOT NULL,
+  `creneau3` int(11) NOT NULL,
+  `creneau4` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `idsalle` (`idsalle`)
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `horaire`
 --
 
-INSERT INTO `horaire` (`id`, `idsalle`, `date`, `creneau1`, `creneau2`, `creneau3`, `creneau4`) VALUES
-(1, 1, '2020-10-02', 1, 0, 0, 1),
-(2, 2, '2020-10-02', 1, 1, 1, 1),
-(3, 3, '2020-10-02', 1, 1, 0, 1),
-(4, 4, '2020-10-03', 1, 0, 1, 1),
-(5, 5, '2020-10-03', 0, 1, 0, 0),
-(6, 6, '2020-10-03', 1, 0, 0, 1),
-(7, 7, '2020-10-05', 0, 0, 0, 1),
-(8, 8, '2020-10-05', 1, 1, 1, 1),
-(9, 9, '2020-10-05', 1, 1, 1, 0),
-(10, 10, '2020-10-05', 0, 1, 1, 1);
+INSERT INTO `horaire` (`id`, `idsalle`, `date`, `nbplace`, `creneau1`, `creneau2`, `creneau3`, `creneau4`) VALUES
+(1, 1, '2020-10-02', 18, 1, 0, 0, 1),
+(2, 2, '2020-10-02', 18, 1, 1, 1, 1),
+(3, 3, '2020-10-02', 18, 1, 1, 0, 1),
+(4, 4, '2020-10-03', 18, 1, 0, 1, 1),
+(5, 5, '2020-10-03', 18, 0, 1, 0, 0),
+(6, 6, '2020-10-03', 18, 1, 0, 0, 1),
+(7, 7, '2020-10-05', 18, 0, 0, 0, 1),
+(8, 8, '2020-10-05', 18, 1, 1, 1, 1),
+(9, 9, '2020-10-05', 18, 1, 1, 1, 0),
+(10, 10, '2020-10-05', 18, 0, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -88,24 +89,15 @@ INSERT INTO `horaire` (`id`, `idsalle`, `date`, `creneau1`, `creneau2`, `creneau
 
 DROP TABLE IF EXISTS `reservation`;
 CREATE TABLE IF NOT EXISTS `reservation` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `idutilisateur` int NOT NULL,
-  `idsalle` int NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `idutilisateur` int(11) NOT NULL,
+  `idsalle` int(11) NOT NULL,
   `date` date NOT NULL,
   `creneau` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `idutilisateur` (`idutilisateur`),
   KEY `idsalle` (`idsalle`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Déchargement des données de la table `reservation`
---
-
-INSERT INTO `reservation` (`id`, `idutilisateur`, `idsalle`, `date`, `creneau`) VALUES
-(1, 1, 1, '2020-10-02', '08h30-10h00'),
-(2, 2, 2, '2020-10-02', '15h15-16h45'),
-(3, 3, 3, '2020-10-03', '08h30-10h00');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -115,41 +107,26 @@ INSERT INTO `reservation` (`id`, `idutilisateur`, `idsalle`, `date`, `creneau`) 
 
 DROP TABLE IF EXISTS `salle`;
 CREATE TABLE IF NOT EXISTS `salle` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `numero` int NOT NULL,
-  `nbplace` int NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `numero` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `salle`
 --
 
-INSERT INTO `salle` (`id`, `numero`, `nbplace`) VALUES
-(1, 100, 9),
-(2, 101, 0),
-(3, 102, 16),
-(4, 103, 15),
-(5, 104, 3),
-(6, 105, 1),
-(7, 106, 11),
-(8, 107, 0),
-(9, 108, 3),
-(10, 109, 0);
-
--- --------------------------------------------------------
-
---
--- Structure de la table `salles`
---
-
-DROP TABLE IF EXISTS `salles`;
-CREATE TABLE IF NOT EXISTS `salles` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `numero` int NOT NULL,
-  `nb_place` int NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+INSERT INTO `salle` (`id`, `numero`) VALUES
+(1, 100),
+(2, 101),
+(3, 102),
+(4, 103),
+(5, 104),
+(6, 105),
+(7, 106),
+(8, 107),
+(9, 108),
+(10, 109);
 
 -- --------------------------------------------------------
 
@@ -159,13 +136,13 @@ CREATE TABLE IF NOT EXISTS `salles` (
 
 DROP TABLE IF EXISTS `utilisateur`;
 CREATE TABLE IF NOT EXISTS `utilisateur` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `login` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `role` varchar(8) NOT NULL,
   `code_secret` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `utilisateur`
@@ -182,6 +159,23 @@ INSERT INTO `utilisateur` (`id`, `login`, `password`, `role`, `code_secret`) VAL
 (8, 'varius.orci@risusMorbi.net', 'test8', 'etudiant', 'DGF-WMK-YCR-XZB-ZKA-ACD'),
 (9, 'tellus.eu@semsemper.net', 'test9', 'etudiant', 'BAD-ACD-ZKA-ZKA-YCR-YCR'),
 (10, 'admin@3il.fr', 'admin', 'admin', 'BAD-ACD-ZKA-XZB-YCR-DGF');
+
+--
+-- Contraintes pour les tables déchargées
+--
+
+--
+-- Contraintes pour la table `horaire`
+--
+ALTER TABLE `horaire`
+  ADD CONSTRAINT `horaire_ibfk_1` FOREIGN KEY (`idsalle`) REFERENCES `salle` (`id`);
+
+--
+-- Contraintes pour la table `reservation`
+--
+ALTER TABLE `reservation`
+  ADD CONSTRAINT `reservation_ibfk_1` FOREIGN KEY (`idutilisateur`) REFERENCES `utilisateur` (`id`),
+  ADD CONSTRAINT `reservation_ibfk_2` FOREIGN KEY (`idsalle`) REFERENCES `salle` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

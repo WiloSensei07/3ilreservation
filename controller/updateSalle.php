@@ -15,12 +15,13 @@
         $req1->execute(array($date));
         while($horaire = $req1->fetch())
         {
-            $_SESSION['idHoraire'] = $horaire['id'];
+            requete\afficheSalle($horaire);
+            /*$_SESSION['idHoraire'] = $horaire['id'];
             $req2 = $dbh->prepare('SELECT * FROM salle WHERE id = ?');
-            $req2->execute(array($horaire['id']));
+            $req2->execute(array($horaire['idsalle']));
             while($salle = $req2->fetch())
             {
                 requete\afficheSalle($salle);
-            }
+            }*/
         }
     }

@@ -9,5 +9,5 @@
     $req->execute(array($idsalle));
     $salle = $req->fetch();
 
-    echo $salle['id'].'-'.$salle['numero'].'-'.$salle['nbplace'];
+    echo $salle['numero'];
 ?>

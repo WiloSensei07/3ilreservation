@@ -41,14 +41,14 @@
             'date' => $date,
             'creneau' => $creneau
         ));
-        updateSalle($idsalle, $newNbplace);
+        updateSalle($idsalle, $newNbplace, $date);
         //echo('<span style="color: green;">Salle reservé avec succès</span>');
        // header('location: ../view/homebooking.php');
     }
 
-    function updateSalle($idsalle, $newNbplace)
+    function updateSalle($idsalle, $newNbplace, $date)
     {
         require 'connect.php';
-        $req2 = $dbh->prepare('UPDATE salle SET nbplace = ? WHERE id = ?');
-        $req2->execute(array($newNbplace, $idsalle));
+        $req2 = $dbh->prepare('UPDATE horaire SET nbplace = ? WHERE idsalle = ? AND date = ? ');
+        $req2->execute(array($newNbplace, $idsalle, $date));
     }

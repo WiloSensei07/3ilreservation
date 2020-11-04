@@ -20,8 +20,7 @@ CREATE TABLE utilisateur (
 
 CREATE TABLE salle (
             id          int             primary key 	not null   AUTO_INCREMENT,
-            numero      int			    	not null   ,
-            nbplace     int			    	not null      
+            numero      int			    	not null     
     );
 
 
@@ -40,12 +39,13 @@ CREATE TABLE horaire (
             id          int           	not null    AUTO_INCREMENT,
     	    idsalle	int		not null,
             date     	DATE	   	not null,
+	    nbplace	int		not null,
     	    creneau1	int 		not null,
     	    creneau2	int 		not null,
     	    creneau3	int 		not null,
     	    creneau4	int 		not null,
     	    PRIMARY KEY(id) ,
-    	    FOREIGN KEY(idSalle) REFERENCES salles(id)
+    	    FOREIGN KEY(idSalle) REFERENCES salle(id)
     );
 
 --  table reservation---------------- 

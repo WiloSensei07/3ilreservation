@@ -30,7 +30,7 @@
             type:"GET",
             data:obj
         }).done(function( arg ) {
-            document.getElementById('numeroSalle').innerText = arg[2]+arg[3]+arg[4];
+            document.getElementById('numeroSalle').innerText = arg;
         });
     }
 </script>

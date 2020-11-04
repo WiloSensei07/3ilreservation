@@ -7,11 +7,11 @@
         function listeSalle()
         {
             require'connect.php';
-            $requette = $dbh->prepare('SELECT * FROM salle');
+            $requette = $dbh->prepare('SELECT * FROM horaire');
             $requette->execute();
-            while($salle = $requette->fetch())
+            while($horaire = $requette->fetch())
             {
-               afficheSalle($salle);
+               afficheSalle($horaire);
             }
         }
 
@@ -28,19 +28,24 @@
         }
 
 
-        function afficheSalle($salle)
+        function afficheSalle($horaire)
         {
-            if($salle['nbplace'] == 1)
+            require'connect.php';
+            $requette = $dbh->prepare('SELECT * FROM salle WHERE id = ?');
+            $requette->execute(array($horaire['idsalle']));
+            $salle = $requette->fetch();
+
+            if($horaire['nbplace'] == 1)
             {
                 $message = 'place disponible';
                 $color = '#209708';
                 $bouton = 'enabled';
-            }elseif($salle['nbplace'] > 1)
+            }elseif($horaire['nbplace'] > 1)
             {
                 $message = 'places disponibles';
                 $color = '#209708';
                 $bouton = 'enabled';
-            }elseif($salle['nbplace'] == 0 || $salle['nbplace'] < 1)
+            }elseif($horaire['nbplace'] == 0 || $horaire['nbplace'] < 1)
             {
                 $message = 'place disponible';
                 $color = 'red';
@@ -52,7 +57,7 @@
                             <img class="card-img-top" src="../img/salle1.jpg" alt="Card image cap" style="border-top-left-radius: 20px; border-top-right-radius: 20px;">
                             <div class="card-body text-center">
                                 <h5 class="card-title">'.$salle['numero'].'</h5>
-                                <p class="card-text" style="color: '.$color.';">'.$salle['nbplace'].' '.$message.'</p>
+                                <p class="card-text" style="color: '.$color.';">'.$horaire['nbplace'].' '.$message.'</p>
                                 <input type="hidden" id="idHoraire" value="">
                                 <input type="hidden" id="idCreneau" value="">
                                 <button type="button" class="btn btn-primary" id="'.$salle['id'].'" data-toggle="modal" 
@@ -117,7 +122,7 @@
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal" id="quitter" style="visibility: hidden;" onclick="rafraichir()">Quitter</button>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal" id="annuler">Annuler</button>
-                        <button type="button" class="btn btn-primary" '.$active.' id="'.$salle['nbplace'].'" onclick="confirmReservation(this.id)" >Confirmer</button>
+                        <button type="button" class="btn btn-primary" '.$active.' id="'.$horaire['nbplace'].'" onclick="confirmReservation(this.id)" >Confirmer</button>
                       </div>
                     </div>
                   </div>

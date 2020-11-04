@@ -1,19 +1,16 @@
 <?php
     session_start();
 
-  $token = uniqid(rand(), true);
+    $token = uniqid(rand(), true);
 
-  $_SESSION['token'] = $token;
+    $_SESSION['token'] = $token;
 
-$_SESSION['token_time'] = time();
-
+    $_SESSION['token_time'] = time();
 
     if($_SESSION['login'] == true)
     {
         header('location: ../view/index2.php');
     }
-
-
 
 ?>
 

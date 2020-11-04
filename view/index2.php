@@ -1,5 +1,9 @@
 <?php
-session_start();
+    session_start();
+    if($_SESSION['login'] == false)
+    {
+        header('location: login.php');
+    }
 ?>
 
 <!DOCTYPE html>
@@ -13,6 +17,8 @@ session_start();
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
         <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+        <link rel="stylesheet" href="../stylesheet/login.css">
+        <link rel="stylesheet" href="../stylesheet/home.css">
     </head>
     <body>
 
@@ -22,7 +28,15 @@ session_start();
         <!-- Body -->
         <div class="container-fluid">
             <div class="row">
-                <?php require_once("filter.php");  require_once("body.php"); ?>
+                <?php
+                    if($_SESSION['role'] == 'etudiant')
+                    {
+                        require_once("filter.php");  require_once("body.php");
+                    }else if($_SESSION['role'] == 'admin')
+                    {
+                        require_once("listeSalles.php");  require_once("body.php");
+                    }
+                ?>
             </div>
         </div>
 

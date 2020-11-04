@@ -1,5 +1,10 @@
 <?php
     session_start();
+
+    if($_SESSION['login'] == true)
+    {
+        header('location: ../view/index2.php');
+    }
 ?>
 
 <!DOCTYPE html>
@@ -8,7 +13,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../stylesheet/login.css">
-        <title>Document</title>
+        <title>3IL: Connexion</title>
     </head>
     <body>
         <section class="login-page">
@@ -18,12 +23,14 @@
                         <h2> Member Login</h2>
                     </div>
                     <div class="form-body">
-                        <input type="text" name="email" id="" placeholder="Enter name" required>
+                        <input type="text" name="email" id="" placeholder="User name" required>
                         <input type="password" name="password" id="" placeholder="Password" required>
+                        <input type="hidden" name="csrf" value="" >
                     </div>
                     <div class="form-footer">
                         <button type="submit" name="connexion">Sign In</button>
                     </div>
+                    <a href="pseudo.php" style="color: white; "> Connexion par code </a>
                 </div>
             </form>
         </section>

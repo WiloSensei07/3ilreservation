@@ -1,22 +1,38 @@
-<h3>Je suis un étudiant </h3>
+<?php
+    // session_start();
+?>
 
+<br>
+<h3 class="text-center" style="color: #1d1c1c">Liste des salles de TP </h3><br>
 
-<div class="col-lg-10 col-sm-12 ">
-    <div class="col-xs-11 col-md-12 row ">
-        <div class="col-xs-3 col-sm-4 col-md-3">
-            <div class="row">
-                <div class="col-12 col-sm-10 offset-sm-1 long my-2 mt-3 ">
-                    <div class="card text-center">
-                        <a href="#"> 202 </a>
-                        <hr class="md-4">
-                        <div class="card-body"style="color:black;">
-                            <h5 class ="card-title" style="font-weight:bold;">Nom du plat</h5>
-                            <p class="card-text">  dsqqsdq </p></br>
-                            <a class="btn btn-outline-secondary" href="#" >    VOIR  </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="row align-items-center" id="salle">
+    <?php
+        require_once '../controller/requettes.php';
+        use backEndAccueil as requete;
+        requete\listeSalle();
+    ?>
 </div>
+
+<?php
+    echo '<input type="hidden" id="id_utilisateur" value="'.$_SESSION['idUtilisateur'].'">';
+?>
+
+<script>
+    function idSalle(idSalle)
+    {
+        document.getElementById('idSalle').value = idSalle;
+        let idutilisateur = document.getElementById('id_utilisateur').value ;
+        document.getElementById('idUtilisateur').value = idutilisateur;
+
+        let obj = {id: idSalle}
+        $.ajax({
+            url: "../controller/test.php",
+            type:"GET",
+            data:obj
+        }).done(function( arg ) {
+            document.getElementById('numeroSalle').innerText = arg;
+        });
+    }
+</script>
+
+<script src="../js/confirmReservation.js"></script>

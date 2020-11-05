@@ -9,11 +9,11 @@
                 $i = 0;
 
                 require_once '../controller/connect.php';
-                $req = $dbh->prepare('SELECT * FROM reservation WHERE idutilisateur = ?');
-                $req->execute(array($idutilisateur));
+                /*$req = $dbh->prepare('SELECT * FROM reservation WHERE idutilisateur = ?');
+                $req->execute(array($idutilisateur));*/
 
-                $requette = $dbh->prepare('SELECT DISTINCT date FROM reservation');
-                $requette->execute();
+                $requette = $dbh->prepare('SELECT DISTINCT date FROM reservation WHERE idutilisateur = ?');
+                $requette->execute(array($idutilisateur));
                 while($reservation = $requette->fetch())
                 {
                     echo '
@@ -25,8 +25,8 @@
                         <hr class="md-4">
                         <h4 style="color: #1d1c1c">'.$dateReservation.'</h4>
                     ';
-                    $req2 = $dbh->prepare('SELECT * FROM reservation WHERE date = ?');
-                    $req2->execute(array($dateReservation));
+                    $req2 = $dbh->prepare('SELECT * FROM reservation WHERE date = ? AND idutilisateur = ?');
+                    $req2->execute(array($dateReservation, $idutilisateur));
                     while($row = $req2->fetch())
                     {
                         $req3 = $dbh->prepare('SELECT * FROM salle WHERE id = ?');
@@ -92,10 +92,10 @@
                 }
             ?>
 
-
-        <!--<div>
+<!--
+        <div>
             <hr class="md-4">
-            <h4 style="color: #1d1c1c">2020/11/01</h4>
+            <h4 style="color: #1d1c1c">2020/10/01</h4>
             <div class="row">
                 <?php
 /*                        for($i=0; $i<4; $i++)
@@ -105,19 +105,18 @@
                                     <div class="card" style="width: 18rem; border-radius: 20px;  border: 2px solid green;">
                                         <img class="card-img-top" src="../img/salle1.jpg" alt="Card image cap" style="border-top-left-radius: 20px; border-top-right-radius: 20px;">
                                         <div class="card-body text-center">
-                                            <h5 class="card-title">111</h5>
+                                            <h5 class="card-title">11'.$i.'</h5>
                                             <h6 class="card-title">08h30-10h00</h6>
                                             <p class="card-text" ></p>
                                             <i class="fas fa-check" style="color: #0CA60C"></i>
                                         </div>
                                     </div>
-                                </div> 
+                                </div>
                             ';
                         }
                         */?>
             </div>
         </div>-->
-
 
 
     </div>

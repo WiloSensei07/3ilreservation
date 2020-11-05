@@ -2,49 +2,51 @@
     session_start();
     $_SESSION['login'] = false;
 
-    // Mise en place du Token CSRF
-    // 1) create a key for hash_hmac function
-    if(empty($_SESSION['key']))
-    {
-        $_SESSION['key'] = bin2hex(random_bytes(32));
-    }
-
-    // create token CSRF
-    $csrf = hash_hmac('sh256', 'this is some string: index.php', $_SESSION['key']);
-
-    // Validate token
-
     if( isset($_POST['connexion']) ) {
-        //if(hash_equals($csrf, $_POST['csrf']))
-        //{
-            require_once ('connect.php');
-            $login = $_POST['email'];
-            $password = $_POST['password'];
-            // hash_password($dbh);
-            $req = $dbh->prepare( 'SELECT * FROM utilisateur WHERE login = ? ' );
-            $req->execute( array( $login ) );
-            $utilisateur = $req->fetch();
 
-            if(empty($utilisateur))
+        if(isset($_SESSION['token']) && isset($_SESSION['token_time']) &&  isset($_POST['token']))
+        {
+            //Si le jeton de la session correspond à celui du formulaire
+            if($_SESSION['token'] == $_POST['token'])
             {
-                echo "nom d'utilisateur incorrect ";
-            }else if( password_verify( $password, $utilisateur['password'] ) )
-            {
-                $_SESSION['idUtilisateur'] = $utilisateur['id'];
-                $_SESSION['role'] = $utilisateur['role'];
-                $_SESSION['login'] = true;
-                header('location: ../view/index2.php');
+                //On stocke le timestamp qu'il était il y a 15 minutes
+                $timestamp_ancien = time() - (0.1*60);
+                //Si le jeton n'est pas expiré
+                if($_SESSION['token_time'] >= $timestamp_ancien)
+                {
+                    require_once ('connect.php');
+                    $login = $_POST['email'];
+                    $password = $_POST['password'];
+                    // hash_password($dbh);
+                    $req = $dbh->prepare( 'SELECT * FROM utilisateur WHERE login = ? ' );
+                    $req->execute( array( $login ) );
+                    $utilisateur = $req->fetch();
+
+                    if(empty($utilisateur))
+                    {
+                        echo "nom d'utilisateur incorrect ";
+                    }else if( password_verify( $password, $utilisateur['password'] ) )
+                    {
+                        $_SESSION['idUtilisateur'] = $utilisateur['id'];
+                        $_SESSION['role'] = $utilisateur['role'];
+                        $_SESSION['login'] = true;
+                        header('location: ../view/index2.php');
+                    }else
+                    {
+                        echo 'mot de passe incorrect';
+                    }
+
+                }else
+                {
+                    echo 'Token time failed' ;
+                }
             }else
             {
-                echo 'mot de passe incorrec';
+                echo "Token failed";
             }
-        //}else
-        //{
-            //echo 'CSRF Token failed ';
-        //}
-
-
+        }
     }
+
 
     if(isset($_POST['deconnexion']))
     {

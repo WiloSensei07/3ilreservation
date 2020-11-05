@@ -1,10 +1,17 @@
 <?php
     session_start();
 
+    $token = uniqid(rand(), true);
+
+    $_SESSION['token'] = $token;
+
+    $_SESSION['token_time'] = time();
+
     if($_SESSION['login'] == true)
     {
         header('location: ../view/index2.php');
     }
+
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +32,9 @@
                     <div class="form-body">
                         <input type="text" name="email" id="" placeholder="User name" required>
                         <input type="password" name="password" id="" placeholder="Password" required>
-                        <input type="hidden" name="csrf" value="" >
+                        <input type="hidden" name="token" value="<?php
+                        echo $token;
+                        ?>">
                     </div>
                     <div class="form-footer">
                         <button type="submit" name="connexion">Sign In</button>

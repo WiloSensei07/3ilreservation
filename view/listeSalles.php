@@ -19,7 +19,7 @@
                 {
                     echo '
                         <tr class="table-secondary">
-                            <th scope="col" id="'.$salle['id'].'" onclick="chooseSalle(this.id)">Salle '.$salle['numero'].'</th>
+                            <th scope="col" id="'.$salle['id'].'" onclick="chooseSalle(this.id)" class="bg-">Salle '.$salle['numero'].'</th>
                         </tr>
                     ';
                 }

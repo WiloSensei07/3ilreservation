@@ -17,7 +17,7 @@
                     require_once ('connect.php');
                     $login = $_POST['email'];
                     $password = $_POST['password'];
-                    // hash_password($dbh);
+                     //hash_password($dbh);
                     $req = $dbh->prepare( 'SELECT * FROM utilisateur WHERE login = ? ' );
                     $req->execute( array( $login ) );
                     $utilisateur = $req->fetch();
